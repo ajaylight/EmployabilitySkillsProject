@@ -4,50 +4,68 @@ A console-based Java application for managing movie listings, showtimes, seat se
 
 ## Project overview
 
-This project is being developed by **Team L** as a Java console project. It uses object-oriented programming, Java Collections, custom exceptions, and a manually implemented data structure.
+This project is developed by **Team L** as a Java console project. It demonstrates object-oriented programming, Java Collections, custom exceptions, and a manually implemented data structure.
 
-## Planned functionality
+## Features
 
 ### Customer
 - Browse the movie catalogue.
 - View showtimes and seat availability.
-- Book movie tickets.
+- Book movie tickets by selecting seats.
 - Cancel personal bookings.
-- View the waiting-list count.
+- Join the waiting list when selected seats are unavailable.
+- View the waiting-list count for a show.
 
 ### Admin
 - View movies and showtimes.
-- View revenue reports.
+- View the revenue report.
 - Check waiting-list counts.
 
 ## Technologies
-- Java
+- Java 17
 - Maven
 - Java Collections Framework
 - Git and GitHub
 
 ## Project constraints
-- Console-based interface using Scanner.
+- Console-based interface using `Scanner`.
 - No graphical user interface.
 - No database; data is maintained in memory while the application runs.
 
-## Development stages
+## Object-oriented programming
+- **Encapsulation:** Model fields are private and accessed through methods.
+- **Inheritance:** Customer and Admin extend the abstract User class.
+- **Polymorphism:** Customer and Admin provide their own getRole() implementation.
+- **Abstraction:** User defines common user information and an abstract role method.
 
-The project is being developed incrementally in the following order:
+## Other Java requirements
+- Three custom checked exceptions for invalid shows, unavailable seats, and missing bookings.
+- A manually implemented linked-list FIFO waiting queue.
+- Collections including ArrayList, HashMap, and HashSet.
 
-1. Repository documentation and ignore rules.
-2. Maven build configuration.
-3. Custom exception classes.
-4. Waiting-list entry model.
-5. Custom linked-list waiting queue.
-6. User abstraction and Customer/Admin classes.
-7. Movie, Show, and Booking models.
-8. Movie, booking, and report services.
-9. Console menu and application integration.
+## Run the project
 
-## Running the project
+Make sure Java 17 and Maven are installed.
 
-Build and run instructions will be added when the Maven configuration and application entry point are introduced.
+Compile the project:
+
+```bash
+mvn clean compile
+```
+
+Run the application:
+
+```bash
+java -cp target/classes app.Main
+```
+
+The demo administrator password is:
+
+```text
+admin123
+```
+
+Customer and booking data are stored in memory and reset when the application exits.
 
 ## Team
 **Team L**
