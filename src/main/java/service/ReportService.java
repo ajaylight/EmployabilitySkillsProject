@@ -1,44 +1,50 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.Booking;
 
-/**
- * Displays booking and revenue information for the administrator.
- */
+/** Creates a simple revenue report for the admin. */
 public class ReportService {
+    public void printRevenueReport(BookingService bookingService) {
+        ArrayList<Booking> allBookings = bookingService.getAllBookings();
+        HashMap<String, Double> revenueByShow = new HashMap<String, Double>();
+        double totalRevenue = 0;
+        int activeBookings = 0;
 
-    private BookingService bookingService;
+        for (int i = 0; i < allBookings.size(); i++) {
+            Booking booking = allBookings.get(i);
 
-    /**
-     * Uses BookingService to read the current booking records.
-     */
-    public ReportService(BookingService bookingService) {
-        this.bookingService = bookingService;
-    }
+            if (!booking.isCancelled()) {
+                activeBookings++;
+                totalRevenue = totalRevenue + booking.getTotalAmount();
 
-    /**
-     * Displays all active bookings and the total revenue.
-     */
-    public void displayRevenueReport() {
-        ArrayList<Booking> bookings = bookingService.getAllBookings();
+                String showId = booking.getShow().getShowId();
+                Double oldAmount = revenueByShow.get(showId);
 
-        System.out.println("\n========== REVENUE REPORT ==========");
+                if (oldAmount == null) {
+                    oldAmount = 0.0;
+                }
 
-        if (bookings.isEmpty()) {
-            System.out.println("No bookings have been made yet.");
-        } else {
-            for (Booking booking : bookings) {
-                System.out.println("Booking ID: " + booking.getBookingId()
-                        + " | Show ID: " + booking.getShowId()
-                        + " | Amount: Rs. " + booking.getTotalAmount());
+                revenueByShow.put(showId, oldAmount + booking.getTotalAmount());
             }
         }
 
-        System.out.println("------------------------------------");
-        System.out.println("Total active bookings: " + bookings.size());
-        System.out.println("Total revenue: Rs. " + bookingService.getTotalRevenue());
+        System.out.println("\n========== REVENUE REPORT ==========");
+        System.out.println("Bookings recorded: " + allBookings.size());
+        System.out.println("Active bookings: " + activeBookings);
+        System.out.println("Total revenue: Rs." + totalRevenue);
+        System.out.println("Revenue by show:");
+
+        if (revenueByShow.size() == 0) {
+            System.out.println("No ticket sales yet.");
+        } else {
+            for (String showId : revenueByShow.keySet()) {
+                System.out.println(showId + " : Rs." + revenueByShow.get(showId));
+            }
+        }
+
         System.out.println("====================================");
     }
 }

@@ -1,12 +1,9 @@
 package model;
 
-/**
- * Represents an administrator who can view system reports.
- */
+/** Admin can view revenue reports. */
 public class Admin extends User {
-
-    public Admin(String userId, String name) {
-        super(userId, name);
+    public Admin(String userId, String name, String phone) {
+        super(userId, name, phone);
     }
 
     @Override

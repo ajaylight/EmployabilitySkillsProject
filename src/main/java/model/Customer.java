@@ -1,12 +1,9 @@
 package model;
 
-/**
- * Represents a customer who can browse movies and book tickets.
- */
+/** Customer can book and cancel movie tickets. */
 public class Customer extends User {
-
-    public Customer(String userId, String name) {
-        super(userId, name);
+    public Customer(String userId, String name, String phone) {
+        super(userId, name, phone);
     }
 
     @Override

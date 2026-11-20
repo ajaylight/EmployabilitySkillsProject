@@ -2,39 +2,34 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- * Stores the details of a customer's movie ticket booking.
- */
+/** Stores one customer's booking. */
 public class Booking {
-
     private String bookingId;
-    private String customerId;
-    private String showId;
+    private Customer customer;
+    private Show show;
     private ArrayList<Integer> seatNumbers;
     private double totalAmount;
+    private boolean cancelled;
 
-    /**
-     * Creates a booking with the selected seats and total ticket amount.
-     */
-    public Booking(String bookingId, String customerId, String showId,
-                   ArrayList<Integer> seatNumbers, double totalAmount) {
+    public Booking(String bookingId, Customer customer, Show show, ArrayList<Integer> seatNumbers) {
         this.bookingId = bookingId;
-        this.customerId = customerId;
-        this.showId = showId;
+        this.customer = customer;
+        this.show = show;
         this.seatNumbers = new ArrayList<Integer>(seatNumbers);
-        this.totalAmount = totalAmount;
+        this.totalAmount = show.getTicketPrice() * seatNumbers.size();
+        this.cancelled = false;
     }
 
     public String getBookingId() {
         return bookingId;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public String getShowId() {
-        return showId;
+    public Show getShow() {
+        return show;
     }
 
     public ArrayList<Integer> getSeatNumbers() {
@@ -45,12 +40,19 @@ public class Booking {
         return totalAmount;
     }
 
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void cancel() {
+        cancelled = true;
+    }
+
     @Override
     public String toString() {
         return "Booking ID: " + bookingId
-                + ", Customer ID: " + customerId
-                + ", Show ID: " + showId
-                + ", Seats: " + seatNumbers
-                + ", Total: Rs. " + totalAmount;
+                + " | Movie show: " + show.getShowId()
+                + " | Seats: " + seatNumbers
+                + " | Amount: Rs." + totalAmount;
     }
 }

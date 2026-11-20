@@ -1,20 +1,15 @@
 package model;
 
-/**
- * Common parent class for all users of the booking system.
- * Customer and Admin will inherit these common details.
- */
+/** Abstract parent class for Customer and Admin. */
 public abstract class User {
-
     private String userId;
     private String name;
+    private String phone;
 
-    /**
-     * Creates a user with an ID and name.
-     */
-    public User(String userId, String name) {
+    public User(String userId, String name, String phone) {
         this.userId = userId;
         this.name = name;
+        this.phone = phone;
     }
 
     public String getUserId() {
@@ -25,8 +20,9 @@ public abstract class User {
         return name;
     }
 
-    /**
-     * Each type of user provides its own role.
-     */
+    public String getPhone() {
+        return phone;
+    }
+
     public abstract String getRole();
 }
